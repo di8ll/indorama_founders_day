@@ -154,9 +154,11 @@ const SportPage = () => {
     );
   }
 
-  return (
+ return (
     <div className="w-full min-h-screen bg-[#F8FAFC] flex flex-col justify-between antialiased selection:bg-teal-500/20">
-      <div>
+      
+      {/* AREA KONTEN UTAMA */}
+      <div className="flex-1">
         {/* ================= 1. HERO BANNER ================= */}
         <div
           className="relative h-56 sm:h-64 md:h-72 w-full flex items-center p-6 sm:p-12 text-white bg-cover transition-all duration-500"
@@ -257,8 +259,7 @@ const SportPage = () => {
                   let badgeTimeStyle = "";
 
                   if (isLive) {
-                    cardBorderStyle =
-                      "border-2 border-red-500 shadow-[0_4px_20px_rgba(237,28,36,0.15)] animate-[pulse_3s_infinite]";
+                    cardBorderStyle = "border-2 border-red-500 shadow-[0_4px_20px_rgba(237,28,36,0.15)] animate-[pulse_3s_infinite]";
                     headerStyle = "bg-red-50/70 border-red-200";
                     badgeTimeStyle = "bg-red-100 border-red-200 text-red-700";
                   } else if (isUpcoming) {
@@ -312,7 +313,6 @@ const SportPage = () => {
                           <span className="text-[10px] font-extrabold text-[#008080] tracking-widest uppercase bg-teal-50/60 px-3 py-1 rounded-full border-2 border-teal-200/80 text-center">
                             {match.stage}
                           </span>
-                          
                           {match.sportType && (match.sportType.toLowerCase().includes("putra") || match.sportType.toLowerCase().includes("putri")) && (
                             <span className={`text-[10px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full border-2 text-center ${
                               match.sportType.toLowerCase().includes("putri") 
@@ -384,13 +384,12 @@ const SportPage = () => {
                 })}
               </div>
 
-              {/* ================= BAR PAGINATION ================= */}
+              {/* BAR PAGINATION */}
               {totalPages > 1 && (
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200">
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
                     Halaman <span className="text-slate-700">{currentPage + 1}</span> Dari {totalPages} Halaman
                   </p>
-
                   <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
                     <button
                       onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
@@ -399,7 +398,6 @@ const SportPage = () => {
                     >
                       ← Halaman Sebelumnya
                     </button>
-
                     <button
                       onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
                       disabled={currentPage === totalPages - 1}
@@ -411,127 +409,126 @@ const SportPage = () => {
                 </div>
               )}
             </div>
- // ... batas akhir dari grid atau pagination di atasnya
-            ) : (
-              /* ================= STATE KOSONG ================= */
-              <div className="text-center py-20 bg-white border-2 border-dashed border-slate-300 rounded-2xl shadow-sm max-w-md mx-auto">
-                <span className="text-5xl block mb-3 animate-[bounce_2s_infinite]">
-                  {activeTab === "live" ? "🎥" : activeTab === "jadwal" ? "⏳" : "🏁"}
-                </span>
-                <p className="text-slate-500 text-sm font-bold tracking-wide">
-                  {activeTab === "live"
-                    ? "Tidak ada pertandingan live saat ini."
-                    : activeTab === "jadwal"
-                    ? "Jadwal pertandingan mendatang belum tersedia."
-                    : "Belum ada riwayat hasil pertandingan."}
-                </p>
-                <p className="text-slate-400 text-[11px] mt-1">Coba lihat menu tab lainnya untuk info terbaru.</p>
-              </div>
-            )}
-          </div>
+          ) : (
+            /* ================= STATE KOSONG ================= */
+            <div className="text-center py-20 bg-white border-2 border-dashed border-slate-300 rounded-2xl shadow-sm max-w-md mx-auto">
+              <span className="text-5xl block mb-3 animate-[bounce_2s_infinite]">
+                {activeTab === "live" ? "🎥" : activeTab === "jadwal" ? "⏳" : "🏁"}
+              </span>
+              <p className="text-slate-500 text-sm font-bold tracking-wide">
+                {activeTab === "live"
+                  ? "Tidak ada pertandingan live saat ini."
+                  : activeTab === "jadwal"
+                  ? "Jadwal pertandingan mendatang belum tersedia."
+                  : "Belum ada riwayat hasil pertandingan."}
+              </p>
+              <p className="text-slate-400 text-[11px] mt-1">Coba lihat menu tab lainnya untuk info terbaru.</p>
+            </div>
+          )}
         </div>
+      </div>
 
-        {/* ================= 4. DETAILED MODAL OVERLAY ================= */}
-        {selectedMatch && (
-          <div className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl border border-slate-100 flex flex-col max-h-[92vh]">
-              {/* Header Modal */}
-              <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-teal-400">
-                    {selectedMatch.stage} • INDORAMA PORTAL
-                  </span>
-                  <span className="text-xs text-slate-300 font-medium mt-0.5">
-                    📍 {selectedMatch.venue}
-                  </span>
-                </div>
-                <button
-                  onClick={() => setSelectedMatchId(null)}
-                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center font-bold text-sm transition-all"
-                >
-                  ✕
-                </button>
+      {/* ================= 4. DETAILED MODAL OVERLAY ================= */}
+      {selectedMatch && (
+        <div className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl border border-slate-100 flex flex-col max-h-[92vh]">
+            {/* Header Modal */}
+            <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between shrink-0">
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black uppercase tracking-widest text-teal-400">
+                  {selectedMatch.stage} • INDORAMA PORTAL
+                </span>
+                <span className="text-xs text-slate-300 font-medium mt-0.5">
+                  📍 {selectedMatch.venue}
+                </span>
               </div>
+              <button
+                onClick={() => setSelectedMatchId(null)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center font-bold text-sm transition-all"
+              >
+                ✕
+              </button>
+            </div>
 
-              {/* Konten Modal */}
-              <div className="flex-1 overflow-y-auto space-y-5 p-5">
-                {/* Papan Skor Utama */}
-                <div className="flex items-center justify-between bg-slate-50 rounded-2xl p-4 border border-slate-100">
-                  <div className="w-[35%] flex flex-col items-center text-center">
-                    <div className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center mb-1 shadow-sm overflow-hidden">
-                      <img 
-                        src={`/logos/${getLogoFileName(selectedMatch.teamA)}`}
-                        alt={selectedMatch.teamA}
-                        className="w-full h-full object-contain p-1"
-                        onError={(e) => { e.currentTarget.src = '/logos/default-club.png'; }}
-                      />
-                    </div>
-                    <span className="text-[11px] font-black uppercase tracking-wide text-slate-700">{selectedMatch.teamA}</span>
+            {/* Konten Modal */}
+            <div className="flex-1 overflow-y-auto space-y-5 p-5">
+              {/* Papan Skor Utama */}
+              <div className="flex items-center justify-between bg-slate-50 rounded-2xl p-4 border border-slate-100">
+                <div className="w-[35%] flex flex-col items-center text-center">
+                  <div className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center mb-1 shadow-sm overflow-hidden">
+                    <img 
+                      src={`/logos/${getLogoFileName(selectedMatch.teamA)}`}
+                      alt={selectedMatch.teamA}
+                      className="w-full h-full object-contain p-1"
+                      onError={(e) => { e.currentTarget.src = '/logos/default-club.png'; }}
+                    />
                   </div>
-
-                  <div className="w-[30%] flex flex-col items-center">
-                    {selectedMatch.status === "UPCOMING" ? (
-                      <span className="text-[10px] font-black px-2.5 py-1 bg-slate-200 text-slate-700 rounded-full uppercase tracking-wider">
-                        {selectedMatch.time}
-                      </span>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl font-mono font-black text-slate-900">{selectedMatch.scoreA}</span>
-                        <span className="text-slate-400 font-bold text-lg">:</span>
-                        <span className="text-2xl font-mono font-black text-slate-900">{selectedMatch.scoreB}</span>
-                      </div>
-                    )}
-                    <span className={`text-[9px] font-extrabold tracking-widest mt-1 px-2 py-0.5 rounded-full uppercase ${selectedMatch.status === "LIVE" ? "bg-red-100 text-red-600 animate-pulse" : "bg-blue-100 text-blue-600"}`}>
-                      {selectedMatch.status === "LIVE" ? "🔴 Live Match" : selectedMatch.status === "FINISHED" ? "🏁 Finished" : "⏳ Upcoming"}
-                    </span>
-                  </div>
-
-                  <div className="w-[35%] flex flex-col items-center text-center">
-                    <div className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center mb-1 shadow-sm overflow-hidden">
-                      <img 
-                        src={`/logos/${getLogoFileName(selectedMatch.teamB)}`}
-                        alt={selectedMatch.teamB}
-                        className="w-full h-full object-contain p-1"
-                        onError={(e) => { e.currentTarget.src = '/logos/default-club.png'; }}
-                      />
-                    </div>
-                    <span className="text-[11px] font-black uppercase tracking-wide text-slate-700">{selectedMatch.teamB}</span>
-                  </div>
+                  <span className="text-[11px] font-black uppercase tracking-wide text-slate-700">{selectedMatch.teamA}</span>
                 </div>
 
-                {/* Info Tambahan */}
-                <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-2 text-xs">
-                  {selectedMatch.sportType && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400 font-bold uppercase tracking-wide">Kategori</span>
-                      <span className={`font-bold ${selectedMatch.sportType.toLowerCase().includes("putri") ? "text-pink-600" : "text-blue-600"}`}>
-                        {selectedMatch.sportType}
-                      </span>
+                <div className="w-[30%] flex flex-col items-center">
+                  {selectedMatch.status === "UPCOMING" ? (
+                    <span className="text-[10px] font-black px-2.5 py-1 bg-slate-200 text-slate-700 rounded-full uppercase tracking-wider">
+                      {selectedMatch.time}
+                    </span>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl font-mono font-black text-slate-900">{selectedMatch.scoreA}</span>
+                      <span className="text-slate-400 font-bold text-lg">:</span>
+                      <span className="text-2xl font-mono font-black text-slate-900">{selectedMatch.scoreB}</span>
                     </div>
                   )}
-                  <div className="flex justify-between">
-                    <span className="text-slate-400 font-bold uppercase tracking-wide">Tanggal</span>
-                    <span className="font-bold text-slate-700">{selectedMatch.date}</span>
+                  <span className={`text-[9px] font-extrabold tracking-widest mt-1 px-2 py-0.5 rounded-full uppercase ${selectedMatch.status === "LIVE" ? "bg-red-100 text-red-600 animate-pulse" : "bg-blue-100 text-blue-600"}`}>
+                    {selectedMatch.status === "LIVE" ? "🔴 Live Match" : selectedMatch.status === "FINISHED" ? "🏁 Finished" : "⏳ Upcoming"}
+                  </span>
+                </div>
+
+                <div className="w-[35%] flex flex-col items-center text-center">
+                  <div className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center mb-1 shadow-sm overflow-hidden">
+                    <img 
+                      src={`/logos/${getLogoFileName(selectedMatch.teamB)}`}
+                      alt={selectedMatch.teamB}
+                      className="w-full h-full object-contain p-1"
+                      onError={(e) => { e.currentTarget.src = '/logos/default-club.png'; }}
+                    />
                   </div>
+                  <span className="text-[11px] font-black uppercase tracking-wide text-slate-700">{selectedMatch.teamB}</span>
+                </div>
+              </div>
+
+              {/* Info Tambahan */}
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-2 text-xs">
+                {selectedMatch.sportType && (
                   <div className="flex justify-between">
-                    <span className="text-slate-400 font-bold uppercase tracking-wide">Jam</span>
-                    <span className="font-bold text-slate-700">{selectedMatch.time}</span>
+                    <span className="text-slate-400 font-bold uppercase tracking-wide">Kategori</span>
+                    <span className={`font-bold ${selectedMatch.sportType.toLowerCase().includes("putri") ? "text-pink-600" : "text-blue-600"}`}>
+                      {selectedMatch.sportType}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400 font-bold uppercase tracking-wide">Venue</span>
-                    <span className="font-bold text-slate-700">{selectedMatch.venue}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400 font-bold uppercase tracking-wide">Babak</span>
-                    <span className="font-bold text-slate-700">{selectedMatch.stage}</span>
-                  </div>
+                )}
+                <div className="flex justify-between">
+                  <span className="text-slate-400 font-bold uppercase tracking-wide">Tanggal</span>
+                  <span className="font-bold text-slate-700">{selectedMatch.date}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400 font-bold uppercase tracking-wide">Jam</span>
+                  <span className="font-bold text-slate-700">{selectedMatch.time}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400 font-bold uppercase tracking-wide">Venue</span>
+                  <span className="font-bold text-slate-700">{selectedMatch.venue}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400 font-bold uppercase tracking-wide">Babak</span>
+                  <span className="font-bold text-slate-700">{selectedMatch.stage}</span>
                 </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
-    );
-  };
+        </div>
+      )}
+    </div>
+  );
+};
 
-  export default SportPage;
+export default SportPage;
