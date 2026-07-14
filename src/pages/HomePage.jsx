@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 // ============= INDORAMA BRAND TOKENS =============
 const EVENT_DATE = new Date("2026-07-17T00:00:00");
 
@@ -102,7 +103,7 @@ function Dot({ status, className = "" }) {
       : "bg-white border-2 border-[#DCDAD5]";
   return (
     <span
-      className={`relative flex items-center justify-center w-4 h-4 rounded-full shadow-md ${color} ${className}`}
+      className={`relative flex items-center justify-center w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full shadow-md shrink-0 ${color} ${className}`}
     >
       {status === "active" && (
         <span className="absolute inline-flex h-full w-full rounded-full bg-[#ED1C24] opacity-75 animate-ping" />
@@ -116,7 +117,7 @@ function TimelineCard({ event, status, align }) {
   const isActive = status === "active";
   return (
     <div
-      className={`group relative w-full max-w-sm p-4 sm:p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+      className={`group relative w-full max-w-sm p-3.5 sm:p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
         isActive
           ? "bg-white border-[#ED1C24]/40 shadow-md shadow-[#ED1C24]/10"
           : isDone
@@ -128,7 +129,7 @@ function TimelineCard({ event, status, align }) {
         <span
           className={`absolute -top-2.5 ${
             align === "right" ? "right-4" : "left-4"
-          } text-[8px] font-black uppercase tracking-widest bg-[#ED1C24] text-white px-2 py-0.5 rounded-full shadow`}
+          } text-[7px] sm:text-[8px] font-black uppercase tracking-widest bg-[#ED1C24] text-white px-2 py-0.5 rounded-full shadow whitespace-nowrap`}
         >
           Sedang Berlangsung
         </span>
@@ -138,8 +139,8 @@ function TimelineCard({ event, status, align }) {
           align === "right" ? "sm:flex-row-reverse" : ""
         }`}
       >
-        <span className="text-xl leading-none">{event.icon}</span>
-        <span className="text-[10px] font-black uppercase tracking-widest text-[#8B8D8E]">
+        <span className="text-lg sm:text-xl leading-none">{event.icon}</span>
+        <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-[#8B8D8E]">
           {event.label}
         </span>
       </div>
@@ -150,7 +151,7 @@ function TimelineCard({ event, status, align }) {
       >
         {event.title}
       </h3>
-      <p className="text-[11px] sm:text-xs font-medium text-slate-500 leading-relaxed">
+      <p className="text-[10px] sm:text-xs font-medium text-slate-500 leading-relaxed">
         {event.desc}
       </p>
     </div>
@@ -171,8 +172,8 @@ function TimelineItem({ event, index }) {
       style={{ transitionDelay: `${index * 90}ms` }}
     >
       {/* Mobile layout: single rail on the left */}
-      <div className="sm:hidden relative pl-10">
-        <Dot status={status} className="absolute left-[8px] top-1.5 -translate-x-1/2" />
+      <div className="sm:hidden relative pl-8">
+        <Dot status={status} className="absolute left-[7px] top-1.5 -translate-x-1/2" />
         <TimelineCard event={event} status={status} />
       </div>
 
@@ -194,16 +195,16 @@ function TimelineItem({ event, index }) {
 
 function TimelineSection() {
   return (
-    <section className="w-full pt-28 sm:pt-32 pb-16 sm:pb-24 relative bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
-        <div className="text-center mb-12 sm:mb-16">
-          <span className="inline-block text-[10px] font-black uppercase tracking-[0.3em] text-[#ED1C24] mb-3">
+    <section className="w-full pt-24 sm:pt-32 pb-14 sm:pb-24 relative bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
+      <div className="max-w-4xl mx-auto px-3 sm:px-6 relative z-10">
+        <div className="text-center mb-10 sm:mb-16">
+          <span className="inline-block text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-[#ED1C24] mb-3">
             Timeline
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black uppercase italic text-[#00308F] tracking-tight">
+          <h2 className="text-xl sm:text-4xl font-black uppercase italic text-[#00308F] tracking-tight px-2">
             Rangkaian Menuju <span className="text-[#ED1C24]">Hari-H</span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm font-semibold text-[#8B8D8E] max-w-md mx-auto">
+          <p className="mt-3 text-[11px] sm:text-sm font-semibold text-[#8B8D8E] max-w-md mx-auto px-2">
             Ikuti setiap tahapan Indorama Founder&apos;s Day 2026, dari pendaftaran
             hingga perayaan puncak.
           </p>
@@ -211,11 +212,11 @@ function TimelineSection() {
 
         <div className="relative">
           {/* connecting rail - mobile */}
-          <div className="sm:hidden absolute left-[15px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#00308F] via-[#DCDAD5] to-[#ED1C24] rounded-full" />
+          <div className="sm:hidden absolute left-[14px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#00308F] via-[#DCDAD5] to-[#ED1C24] rounded-full" />
           {/* connecting rail - desktop */}
           <div className="hidden sm:block absolute left-1/2 -translate-x-1/2 top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#00308F] via-[#DCDAD5] to-[#ED1C24] rounded-full" />
 
-          <div className="flex flex-col gap-8 sm:gap-10">
+          <div className="flex flex-col gap-6 sm:gap-10">
             {timelineEvents.map((event, index) => (
               <TimelineItem key={event.id} event={event} index={index} />
             ))}
@@ -286,41 +287,54 @@ const HomePage = () => {
   const pad = (n) => String(n).padStart(2, "0");
 
   return (
-    <div className="w-full min-h-screen relative bg-slate-50 text-slate-800">
+    <div className="w-full min-h-screen relative bg-slate-50 text-slate-800 overflow-x-hidden">
       {/* TOMBOL KLASEMEN (Posisi di pojok kanan atas) */}
       <button
         onClick={fetchStandings}
-        className="fixed top-4 right-4 z-50 bg-[#00308F] text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest shadow-md hover:bg-[#ED1C24] transition-all"
+        className="fixed z-50 bg-[#00308F] text-white px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-lg text-[8px] sm:text-[10px] font-black uppercase tracking-widest shadow-md hover:bg-[#ED1C24] transition-all whitespace-nowrap"
+        style={{
+          top: "max(0.5rem, env(safe-area-inset-top))",
+          right: "max(0.5rem, env(safe-area-inset-right))",
+        }}
       >
         Klasemen
       </button>
 
       {/* LOGO INDORAMA */}
-      <div className="fixed top-[-30px] sm:top-[-40px] left-0 sm:left-2 z-50 pointer-events-none">
+      <div
+        className="fixed z-[9999]"
+        style={{
+          top: "max(0.5rem, env(safe-area-inset-top))",
+          left: "max(0.5rem, env(safe-area-inset-left))",
+        }}
+      >
         <img
-          src="/logo_indorama.png"
+          src="/logo_ifd.png"
           alt="Indorama"
-          className="w-28 sm:w-40 drop-shadow-md pointer-events-auto block"
+          className="w-16 xs:w-20 sm:w-32 md:w-40 drop-shadow-md block"
         />
       </div>
 
       {/* MODAL KLASEMEN */}
       {isStandingsOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[80vh] overflow-hidden shadow-2xl flex flex-col">
-            <div className="p-4 border-b flex justify-between items-center bg-slate-50">
-              <h2 className="font-black text-[#00308F] uppercase">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-2 sm:p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-4xl max-h-[85vh] sm:max-h-[80vh] overflow-hidden shadow-2xl flex flex-col">
+            <div className="p-3 sm:p-4 border-b flex justify-between items-center bg-slate-50 gap-2">
+              <h2 className="font-black text-[#00308F] uppercase text-[11px] sm:text-base leading-tight">
                 Klasemen Sementara & Perolehan Poin
               </h2>
               <button
                 onClick={() => setIsStandingsOpen(false)}
-                className="text-xl font-bold text-slate-400"
+                className="text-xl font-bold text-slate-400 shrink-0 leading-none px-1"
               >
                 ✕
               </button>
             </div>
-            <div className="overflow-auto p-4">
-              <table className="w-full text-center text-[10px] sm:text-xs">
+            <div className="overflow-auto p-2 sm:p-4">
+              <p className="sm:hidden text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-2 text-center">
+                👉 Geser tabel untuk melihat semua kolom 👈
+              </p>
+              <table className="w-full min-w-[560px] text-center text-[10px] sm:text-xs">
                 <thead>
                   <tr className="text-slate-500 uppercase border-b">
                     <th className="p-2">Rank</th>
@@ -364,7 +378,7 @@ const HomePage = () => {
 
       {/* ================= HERO SECTION ================= */}
       <div
-        className="relative w-full min-h-[100svh] flex flex-col items-center justify-center text-center px-4 sm:px-6 py-16 overflow-hidden bg-cover bg-center"
+        className="relative w-full min-h-[100svh] flex flex-col items-center justify-center text-center px-3 sm:px-6 py-12 sm:py-16 overflow-hidden bg-cover bg-center"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(248, 250, 252, 1)), url('/stadium-banner.jpg')`,
         }}
@@ -373,24 +387,24 @@ const HomePage = () => {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#ED1C24]/10 via-transparent to-transparent blur-3xl pointer-events-none" />
 
         <div className="relative z-10 w-full max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight text-[#00308F] mb-2 uppercase italic drop-shadow-sm leading-tight px-2 mt-20 sm:mt-24">
+          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-6xl font-black tracking-tight text-[#00308F] mb-2 uppercase italic drop-shadow-sm leading-tight px-2 mt-14 sm:mt-24">
             Indorama{" "}
             <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-[#00308F] to-[#ED1C24]">
               Founder&apos;s Day
             </span>
           </h1>
 
-          <p className="text-4xl sm:text-5xl md:text-6xl font-black uppercase italic tracking-wide text-[#ED1C24] mb-8 sm:mb-10">
+          <p className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-black uppercase italic tracking-wide text-[#ED1C24] mb-6 sm:mb-10">
             2026
           </p>
 
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-5 sm:mb-6">
             <div className="inline-flex items-center gap-1 p-1 bg-[#DCDAD5]/50 border border-[#DCDAD5] rounded-full">
               {["internal", "external"].map((group) => (
                 <button
                   key={group}
                   onClick={() => handleGroupChange(group)}
-                  className={`px-4 sm:px-6 py-1.5 rounded-full text-[10px] sm:text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
+                  className={`px-4 sm:px-6 py-1.5 rounded-full text-[9px] sm:text-[11px] font-black uppercase tracking-widest transition-all duration-300 ${
                     activeGroup === group
                       ? "bg-[#00308F] text-white shadow-md"
                       : "text-[#8B8D8E] hover:text-[#00308F]"
@@ -402,48 +416,51 @@ const HomePage = () => {
             </div>
           </div>
 
-          <p className="text-xs font-bold text-[#8B8D8E] uppercase tracking-wider mb-3 animate-bounce">
+          <p className="text-[10px] sm:text-xs font-bold text-[#8B8D8E] uppercase tracking-wider mb-3 animate-bounce px-4">
             👇 Pilih Cabang Olahraga untuk Melihat Jadwal 👇
           </p>
 
-          <div className="mb-8 sm:mb-10 w-full px-2">
-            <div className="flex justify-center items-center gap-3 p-2 bg-white border border-slate-200/80 backdrop-blur-md rounded-xl shadow-xl max-w-2xl mx-auto overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-none">
+          <div className="mb-6 sm:mb-10 w-full px-1 sm:px-2">
+            <div className="flex justify-start sm:justify-center items-center gap-2 sm:gap-3 p-2 bg-white border border-slate-200/80 backdrop-blur-md rounded-xl shadow-xl max-w-2xl mx-auto overflow-x-auto sm:overflow-visible snap-x snap-mandatory scrollbar-none">
               {categoryGroups[activeGroup].map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => handleCategoryClick(cat.id)}
-                  className="shrink-0 snap-center flex flex-col items-center justify-center min-w-[72px] sm:min-w-[80px] p-2.5 rounded-xl text-xs font-bold transition-all duration-300 bg-slate-50 border border-slate-200 text-[#00308F] hover:bg-gradient-to-b hover:from-[#CFE1F4] hover:to-[#CFE1F4]/40 hover:border-[#00308F]/40 hover:scale-110 hover:shadow-md"
+                  className="shrink-0 snap-center flex flex-col items-center justify-center min-w-[64px] sm:min-w-[80px] p-2 sm:p-2.5 rounded-xl text-xs font-bold transition-all duration-300 bg-slate-50 border border-slate-200 text-[#00308F] hover:bg-gradient-to-b hover:from-[#CFE1F4] hover:to-[#CFE1F4]/40 hover:border-[#00308F]/40 sm:hover:scale-110 hover:shadow-md active:scale-95"
                 >
-                  <span className="text-2xl mb-1 drop-shadow-sm">{cat.icon}</span>
-                  <span className="text-[9px] uppercase tracking-wider font-black text-slate-700 whitespace-nowrap">
+                  <span className="text-xl sm:text-2xl mb-1 drop-shadow-sm">{cat.icon}</span>
+                  <span className="text-[8px] sm:text-[9px] uppercase tracking-wider font-black text-slate-700 whitespace-nowrap">
                     {cat.label}
                   </span>
                 </button>
               ))}
             </div>
+            <p className="sm:hidden text-[8px] font-bold text-slate-300 uppercase tracking-wider mt-1.5">
+              ← geser untuk lihat semua →
+            </p>
           </div>
 
-          <div className="w-[85vw] max-w-[260px] sm:max-w-xs mx-auto p-3 sm:p-4 rounded-xl bg-white border-2 border-[#ED1C24]/30 backdrop-blur-xl shadow-md relative">
+          <div className="w-[88vw] max-w-[240px] xs:max-w-[260px] sm:max-w-xs mx-auto p-3 sm:p-4 rounded-xl bg-white border-2 border-[#ED1C24]/30 backdrop-blur-xl shadow-md relative">
             <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[7px] sm:text-[8px] font-black uppercase tracking-widest bg-[#ED1C24] text-white px-2 sm:px-2.5 py-0.5 rounded shadow-sm whitespace-nowrap">
               Acara Mulai
             </span>
             {timeLeft ? (
               <>
-                <div className="flex justify-center items-center gap-2 sm:gap-3 text-2xl sm:text-3xl font-mono font-bold text-[#00308F] pt-1">
-                  <span className="w-10 text-center">{pad(timeLeft.days)}</span>
+                <div className="flex justify-center items-center gap-1.5 sm:gap-3 text-xl xs:text-2xl sm:text-3xl font-mono font-bold text-[#00308F] pt-1">
+                  <span className="w-9 sm:w-10 text-center">{pad(timeLeft.days)}</span>
                   <span className="text-[#8B8D8E] animate-pulse">:</span>
-                  <span className="w-10 text-center">{pad(timeLeft.hours)}</span>
+                  <span className="w-9 sm:w-10 text-center">{pad(timeLeft.hours)}</span>
                   <span className="text-[#8B8D8E] animate-pulse">:</span>
-                  <span className="w-10 text-center text-[#ED1C24]">{pad(timeLeft.minutes)}</span>
+                  <span className="w-9 sm:w-10 text-center text-[#ED1C24]">{pad(timeLeft.minutes)}</span>
                 </div>
-                <div className="grid grid-cols-3 text-[8px] sm:text-[9px] font-black text-[#8B8D8E] uppercase tracking-wider mt-1 px-1">
+                <div className="grid grid-cols-3 text-[7px] sm:text-[9px] font-black text-[#8B8D8E] uppercase tracking-wider mt-1 px-1">
                   <span>Days</span>
                   <span>Hours</span>
                   <span>Minutes</span>
                 </div>
               </>
             ) : (
-              <p className="pt-1 pb-0.5 text-3xl sm:text-4xl font-black italic uppercase text-[#ED1C24] animate-pulse tracking-wider">
+              <p className="pt-1 pb-0.5 text-2xl xs:text-3xl sm:text-4xl font-black italic uppercase text-[#ED1C24] animate-pulse tracking-wider">
                 Let&apos;s Go!
               </p>
             )}
@@ -451,8 +468,8 @@ const HomePage = () => {
         </div>
       </div>
 
-      <footer className="w-full text-center py-5 border-t-2 border-slate-200 bg-white mt-0">
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+      <footer className="w-full text-center py-4 sm:py-5 border-t-2 border-slate-200 bg-white mt-0">
+        <p className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">
           © {new Date().getFullYear()} Indorama
         </p>
       </footer>
