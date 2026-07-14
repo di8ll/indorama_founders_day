@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://103.56.148.93/api",
+    baseURL: "https://api.indoramafoundersday.com/api",
     headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
